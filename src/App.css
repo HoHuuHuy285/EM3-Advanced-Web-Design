@@ -1,5 +1,4 @@
 
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,78 +34,9 @@
   }
 }
 
-label {
-  background-color: #77777768;
-  padding: 10px;
-  display: block;
-  border-radius: 3px;
-  margin-bottom: 5px;
-}
-.toggle-box {
-  display: none;
-}
-
-.toggle-box + label + div {
-  display: none;
-  margin-bottom: 5px;
-}
-.toggle-box:checked + label + div {
-  display: block;
-}
-.accordion + div:before {
-  color: #ffffff;
-  content: "+";
-  display: block;
-  float: right;
-  font-weight: bold;
-  height: 20px;
-  line-height: 20px;
-  margin-right: 5px;
-  text-align: center;
-  width: 20px;
-}
-.toggle-box:checked + label:before {
-  content: "\2212";
-}
 body {
   margin:auto;
   width: 500px;
-}
-.toggle-box {
-  display: none;
-}
-.toggle-box + label {
-  cursor: pointer;
-  display: block;
-  font-weight: bold;
-  line-height: 21px;
-  margin-bottom: 1px;
-  padding: 3px 5px;
-  color: #3b5998;
-  background-color: #eee;
-  padding: 20px;
-}
-.toggle-box + label + div {
-  display: none;
-  margin-bottom: 5px;
-}
-.toggle-box:checked + label + div {
-  display: block;
-}
-.toggle-box + label:before {
-  color: #000000;
-  content: "+";
-  display: block;
-  float: right;
-  font-weight: bold;
-  height: 20px;
-  line-height: 20px;
-  margin-right: 5px;
-  text-align: center;
-  width: 20px;
-}
-.toggle-box:checked + label:before {
-  content: "\2212";
 }
 
 .accordion-title {
