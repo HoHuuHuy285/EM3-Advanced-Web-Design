@@ -1,64 +1,108 @@
-import React, { useState, useEffect } from 'react';
-import "./App.css";
+import {useState} from 'react'
+import AddTaskForm from './components/AddTaskForm.jsx'
+import UpdateForm from './components/UpdateForm.jsx'
+import ToDo from './components/ToDo.jsx'
 
-const AccordionContainer = () => {
-  const [data, setData] = useState([]);
-  const [openIndex, setOpenIndex] = useState(null);
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+import './App.css'
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('https://awd-2023.azurewebsites.net/Accordions', {
-        headers: {
-          'student-name': 'John Doe' // Set the student name here
-        }
-      });
-      const jsonData = await response.json();
-      setData(jsonData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+function App() {
+
+  const [toDo, setToDo] = useState([
+    {id: 1, title: 'Task 1', status: false},
+    {id: 2, title: 'Task 2', status: false}
+  ])
+
+  const [newTask, setNewTask] = useState('')
+  const [updateData, setUpdateData] = useState('')
+
+  const addTask = () => {
+    if(newTask) {
+      let num = toDo.length + 1 
+      
+      setToDo([
+        ...toDo, 
+        { id: num, title: newTask, status: false }
+      ])
+
+      setNewTask('')
+
     }
-  };
+  }
 
-  const handleItemClick = (index) => {
-    setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
-  };
+  const deleteTask = (id) => {
+    
+    setToDo(toDo.filter(task => task.id !== id))
+
+  }
+
+  const markDone = (id) => {
+    
+
+    setToDo(toDo.map(
+      task => task.id === id 
+      ? ({ ...task, status: !task.status }) 
+      : (task) 
+    ))
+
+  }
+
+  const cancelUpdate = () => {
+    setUpdateData('')
+  }
+
+  const changeHolder = (e) => {
+
+    setUpdateData({...updateData, title: e.target.value})
+
+  }
+
+  const updateTask = () => {
+
+    let removeOldRecord = [...toDo].filter(task => task.id !== updateData.id)
+    setToDo([
+      ...removeOldRecord, 
+      updateData
+    ])
+    
+    setUpdateData('')
+
+  }
 
   return (
-    <div className="accordion-container">
-      {data.map((item, index) => (
-        <AccordionItem
-          key={index}
-          title={item.title}
-          content={item.content}
-          isOpen={index === openIndex}
-          onClick={() => handleItemClick(index)}
-        />
-      ))}
-    </div>
-  );
-};
+    <div className="container App">
 
-const AccordionItem = ({ title, content, isOpen, onClick }) => {
-  return (
-    <div className="accordion-item">
-      <div className="accordion-title" onClick={onClick}>
-        {title}
-      </div>
-      {isOpen && <div className="accordion-content">{content}</div>}
-    </div>
-  );
-};
+    <br /><br />
+    <h2>To Do List App (ReactJS)</h2>
+    <br /><br />
 
-const App = () => {
-  return (
-    <div className="App">
-      <AccordionContainer />
+    {updateData && updateData ? (
+      <UpdateForm 
+        updateData={updateData}
+        changeHolder={changeHolder}
+        updateTask={updateTask}
+        cancelUpdate={cancelUpdate}
+      />
+    ) : (
+      <AddTaskForm 
+        newTask={newTask}
+        setNewTask={setNewTask}
+        addTask={addTask}
+      />
+    )}
+
+    {toDo && toDo.length ? '' : 'No Tasks...'}
+
+    <ToDo
+      toDo={toDo}
+      markDone={markDone}
+      setUpdateData={setUpdateData}
+      deleteTask={deleteTask}
+    />  
+
     </div>
   );
-};
+}
 
 export default App;
