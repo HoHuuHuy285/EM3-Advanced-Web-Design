@@ -1,0 +1,92 @@
+.container {
+  font-family: sans-serif;
+  background-color: #ddd;
+  font-size: 30px;
+
+  /* CSS GRID */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 100px 300px 300px 300px;
+  gap: 3px;
+  /* column-gap: 30px;
+    row-gap: 60px; */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #444;
+  font-family: sans-serif;
+}
+
+.header {
+  grid-column: 1 / -1;
+  text-align: center;
+  background-color: aquamarine;
+}
+.sidebar {
+  grid-row: 2/-1;
+  text-align: center;
+  background-color: yellow;
+}
+
+.main {
+  grid-column: 2 / -1;
+  grid-row: 2 /3;
+  text-align: center;
+  background-color: aquamarine;
+}
+
+.footer {
+  text-align: center;
+  grid-column: 2/-1;
+  background-color: aquamarine;
+}
+
+.content-1 {
+  background-color: orange;
+}
+
+.content-2 {
+  background-color: rgb(255, 247, 0);
+}
+
+.content-3 {
+  background-color: rgba(255, 0, 0, 0.53);
+}
+
+/*Tablet(480 x 640)*/
+@media screen and (max-width: 768px) {
+  .container {
+    font-family: sans-serif;
+    background-color: rgb(250, 12, 12) 000;
+    font-size: 30px;
+
+    /* CSS GRID */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* column-gap: 30px;
+        row-gap: 60px; */
+  }
+  .main {
+    height: 300px;
+  }
+  .content-1 {
+    height: 150px;
+  }
+
+  .content-2 {
+    height: 150px;
+  }
+
+  .content-3 {
+    height: 150px;
+  }
+  .footer{
+    height: 150px;
+  }
+}
